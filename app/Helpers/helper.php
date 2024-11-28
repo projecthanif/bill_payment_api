@@ -12,9 +12,11 @@ function generateApiSuccessResponse(string $msg = '', mixed $data = null, $statu
         'statusCode' => $statusCode
     ];
 
-    if ($data) {
+    if ($data !== null) {
         $jsonData['data'] = $data;
     }
+
+
 
     return response()->json($jsonData, $statusCode);
 }
@@ -26,7 +28,7 @@ function generateApiErrorResponse(string $msg = '', mixed $data = null, $statusC
         'message' => $msg,
         'statusCode' => $statusCode
     ];
-    if ($data) {
+    if ($data !== null) {
         $jsonData['data'] = $data;
     }
     return response()->json($jsonData, $statusCode);

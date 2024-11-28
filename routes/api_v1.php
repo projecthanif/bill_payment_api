@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Api\V1\User\LoginUserController;
 use App\Http\Controllers\Api\V1\User\RegisterUserController;
+use App\Http\Controllers\Api\V1\WalletController;
 use App\Http\Resources\Api\V1\User\UserResource;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +21,8 @@ Route::prefix('/user')->group(function () {
 
 
 Route::prefix('/wallet')->middleware('auth:sanctum')->group(function () {
-    Route::get('/balance', []);
+
+    Route::get('/balance', [WalletController::class, 'getBalance']);
+//    Route::get('/{paymentGateWay}/verify', [WalletController::class, 'verify']);
+
 });
