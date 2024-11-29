@@ -1,3 +1,50 @@
+<h3 align="center"> Backend Developer Assessment - Bill Payment API with Wallet System </h3>
+
+## Objective
+
+```
+Create a simple API for a bill payment application focusing on airtime purchase (or any other single service, e.g., data or electricity). The primary
+goal is to evaluate the implementation of a wallet system and the developer’s ability to secure it against concurrency issues
+```
+
+## Installation
+
+Clone this repository to your web server:
+
+   ```bash
+   git clone https://github.com/projecthanif/bill_payment_api.git
+   ```
+
+## Install dependencies
+
+```bash
+composer install
+```
+
+## Set up Laravel configurations
+
+```bash
+copy .env.example .env
+```
+
+1. Update APP_URL
+2. Made use of paystack as billing system check out paystack docs to know how to get secret and public key
+3. After getting the provide then to there fields in env file
+
+```html
+ PAYSTACK_SECRET_KEY=
+ PAYSTACK_PUBLIC_KEY=
+```
+
+## Serve the application
+
+```bash
+php artisan serve
+```
+
+
+## Import Api docs for api documentation
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -9,11 +56,14 @@
 
 ## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and
+creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in
+many web projects, such as:
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache)
+  storage.
 - Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
 - Database agnostic [schema migrations](https://laravel.com/docs/migrations).
 - [Robust background job processing](https://laravel.com/docs/queues).
@@ -23,15 +73,20 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all
+modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a
+modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video
+tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging
+into our comprehensive video library.
 
 ## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in
+becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
 ### Premium Partners
 
@@ -51,17 +106,21 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in
+the [Laravel documentation](https://laravel.com/docs/contributions).
 
 ## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+In order to ensure that the Laravel community is welcoming to all, please review and abide by
+the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell
+via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
 # bill_payment_api
