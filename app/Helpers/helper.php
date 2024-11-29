@@ -17,7 +17,6 @@ function generateApiSuccessResponse(string $msg = '', mixed $data = null, $statu
     }
 
 
-
     return response()->json($jsonData, $statusCode);
 }
 
@@ -32,4 +31,13 @@ function generateApiErrorResponse(string $msg = '', mixed $data = null, $statusC
         $jsonData['data'] = $data;
     }
     return response()->json($jsonData, $statusCode);
+}
+
+function generateTestResponse(string $msg = '', mixed $data = null, int $statusCode = Response::HTTP_OK): JsonResponse
+{
+    return response()->json([
+        'message' => $msg,
+        'data' => $data,
+        'statusCode' => $statusCode
+    ]);
 }

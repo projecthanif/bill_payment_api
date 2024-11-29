@@ -2,16 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Transaction extends AbstractModel
 {
     public $fillable = [
         'user_id',
-        'bill_id',
         'amount',
+        'payment_method',
+        'payment_reference',
         'transaction_type',
         'transaction_status',
-        'transaction_reference'
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

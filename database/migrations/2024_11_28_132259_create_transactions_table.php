@@ -14,11 +14,11 @@ return new class extends Migration {
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('user_id')->index();
-            $table->string('bill_id')->index();
             $table->float('amount');
+            $table->string('payment_method');
+            $table->string('payment_reference');
             $table->string('transaction_type');
             $table->string('transaction_status')->default(TransactionStatus::Pending->value);
-            $table->string('transaction_reference');
             $table->timestamps();
         });
     }

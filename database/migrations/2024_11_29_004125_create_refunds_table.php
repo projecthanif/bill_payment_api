@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bills', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('user_id')->index();
-            $table->string('bill_type');
-            $table->float('amount');
-            $table->string('bill_status');
-            $table->string('comment')->nullable;
+        Schema::create('refunds', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bills');
+        Schema::dropIfExists('refunds');
     }
 };

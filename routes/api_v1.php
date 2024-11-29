@@ -23,6 +23,6 @@ Route::prefix('/user')->group(function () {
 Route::prefix('/wallet')->middleware('auth:sanctum')->group(function () {
 
     Route::get('/balance', [WalletController::class, 'getBalance']);
-//    Route::get('/{paymentGateWay}/verify', [WalletController::class, 'verify']);
+    Route::post('/fund', [WalletController::class, 'fundWallet']);
 
 });
