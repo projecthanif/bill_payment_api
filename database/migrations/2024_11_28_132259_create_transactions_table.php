@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('payment_reference');
             $table->string('transaction_type');
             $table->string('transaction_status')->default(TransactionStatus::Pending->value);
+            $table->string('comment')->nullable();
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Api\V1\Service\AirtimePurchaseController;
 use App\Http\Controllers\Api\V1\User\LoginUserController;
 use App\Http\Controllers\Api\V1\User\RegisterUserController;
 use App\Http\Controllers\Api\V1\WalletController;
@@ -19,10 +20,15 @@ Route::prefix('/user')->group(function () {
     Route::post('/login', LoginUserController::class);
 });
 
+Route::middleware('auth:sanctum')->group(function () {
 
-Route::prefix('/wallet')->middleware('auth:sanctum')->group(function () {
+    Route::prefix('/wallet')->group(function () {
+        Route::get('/balance', [WalletController::class, 'getBalance']);
+        Route::post('/fund', [WalletController::class, 'fundWallet']);
+    });
 
-    Route::get('/balance', [WalletController::class, 'getBalance']);
-    Route::post('/fund', [WalletController::class, 'fundWallet']);
+    Route::prefix('/purchase')->group(function () {
+        Route::post('/airtime', AirtimePurchaseController::class);
+    });
 
 });

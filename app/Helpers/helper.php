@@ -30,7 +30,7 @@ function generateApiErrorResponse(string $msg = '', mixed $data = null, $statusC
     if ($data !== null) {
         $jsonData['data'] = $data;
     }
-    return response()->json($jsonData, $statusCode);
+    return response()->json($jsonData, $statusCode)->header('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
 }
 
 function generateTestResponse(string $msg = '', mixed $data = null, int $statusCode = Response::HTTP_OK): JsonResponse

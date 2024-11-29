@@ -29,13 +29,13 @@ class GetCurrentBalanceAction
         } catch (AuthenticationException $authException) {
             return generateApiErrorResponse(
                 "Authentication Error: {$authException->getMessage()}",
-                Response::HTTP_INTERNAL_SERVER_ERROR
+                statusCode: Response::HTTP_INTERNAL_SERVER_ERROR
             );
 
         } catch (Exception $e) {
             return generateApiErrorResponse(
                 "Could not retrieved balance data due to " . $e->getMessage(),
-                Response::HTTP_INTERNAL_SERVER_ERROR
+                statusCode: Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
     }
