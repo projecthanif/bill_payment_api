@@ -34,8 +34,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('/transactions')->group(function () {
         Route::get('/', [TransactionController::class, 'index']);
-        Route::get('/fund-transaction', [TransactionController::class, 'fundTransaction']);
+        Route::get('/fund-transaction', [TransactionController::class, 'fundTransactions']);
         Route::get('/purchase-transaction', [TransactionController::class, 'purchaseTransactions']);
     });
 
 });
+
+Route::get('/wallet/paystack/verify', [WalletController::class, 'verifyFunding']);

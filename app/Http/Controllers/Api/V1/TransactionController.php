@@ -43,7 +43,7 @@ class TransactionController extends Controller
         return generateApiSuccessResponse('Transaction fetched successfully', $transaction);
     }
 
-    public function fundTransaction(): JsonResponse
+    public function fundTransactions(): JsonResponse
     {
         $transaction = $this->user->transactions()
             ->where('transaction_type', TransactionType::Fund->value)
@@ -54,7 +54,7 @@ class TransactionController extends Controller
         return generateApiSuccessResponse('Wallet Transactions fetched successfully', $mutatedTransactionData);
     }
 
-    public function purchaseTransaction()
+    public function purchaseTransactions(): JsonResponse
     {
         $transaction = $this->user->transactions()
             ->where('transaction_type', TransactionType::Purchase->value)

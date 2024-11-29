@@ -2,8 +2,6 @@
 
 namespace App\Actions\Wallet;
 
-use App\Enums\TransactionStatus;
-use App\Enums\TransactionType;
 use App\Http\Resources\Api\V1\Wallet\WalletResource;
 use App\Models\Wallet;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +21,7 @@ class FundWalletAction
     public function execute(array $validated): \Illuminate\Http\JsonResponse
     {
         try {
-            $user = auth()->user();
+            $user = $validated['user'];
 
             DB::transaction(function () use ($validated, $user) {
 
@@ -35,18 +33,6 @@ class FundWalletAction
 
                 if (!$updatedWalletDetails) {
                     throw new \Exception('Failed to update wallet');
-                }
-
-                $createdTransactionDetails = $user->transactions()->create([
-                    'amount' => $validated['amount'],
-                    'payment_method' => $validated['paymentMethod'],
-                    'payment_reference' => $validated['paymentReference'],
-                    'transaction_type' => TransactionType::Fund->value,
-                    'transaction_status' => TransactionStatus::Success->value,
-                ]);
-
-                if (!$createdTransactionDetails) {
-                    throw new \Exception('Failed to make transaction');
                 }
 
                 return $updatedWalletDetails;
@@ -66,7 +52,5 @@ class FundWalletAction
                 statusCode: Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
-
-
     }
 }

@@ -16,8 +16,9 @@ return new class extends Migration {
             $table->string('user_id')->index();
             $table->float('amount');
             $table->string('payment_method');
-            $table->string('payment_reference');
+            $table->string('payment_reference')->nullable();
             $table->string('transaction_type');
+            $table->string('transaction_reference');
             $table->string('transaction_status')->default(TransactionStatus::Pending->value);
             $table->string('comment')->nullable();
             $table->timestamps();

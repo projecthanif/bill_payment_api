@@ -8,6 +8,7 @@ use App\Enums\TransactionType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\Wallet\AirtimePurchaseRequest;
 use App\Models\Wallet;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 class AirtimePurchaseController extends Controller
@@ -30,10 +31,12 @@ class AirtimePurchaseController extends Controller
         if (!$compare) {
             $comment = 'Wallet balance low';
 
+            $ref = Str::uuid()->toString();
+
             $user->transactions()->create([
                 'amount' => $validatedData['amount'],
                 'payment_method' => 'wallet',
-                'payment_reference' => null,
+                'transaction_reference' => $ref,
                 'transaction_type' => TransactionType::Purchase->value,
                 'transaction_status' => TransactionStatus::Failed->value,
                 'comment' => $comment,

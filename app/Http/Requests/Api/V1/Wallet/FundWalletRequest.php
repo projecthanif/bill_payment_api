@@ -27,8 +27,6 @@ class FundWalletRequest extends FormRequest
     {
         return [
             'amount' => 'required|numeric|min:1',
-            "paymentMethod" => "required",
-            "paymentReference" => "required",
         ];
     }
 }

@@ -26,20 +26,33 @@ class AirtimePurchaseAction
     {
         try {
             $transactionHistory = DB::transaction(function () use ($validatedData) {
+
+                $transactionHistory = $this->makeTransactionHistory(['amount' => $validatedData['amount']]);
+
+                $validatedData['reference'] = $transactionHistory->transaction_reference;
                 $airtimePurchaseData = $this->makeAirtimePurchase($validatedData);
 
 //                $airtimePurchaseData['status'] = false;
 //                $airtimePurchaseData['message'] = "Failed due to service not available";
 
                 $this->transactionData['payment_reference'] = $airtimePurchaseData['payment_reference'];
-                $this->transactionData['amount'] = $airtimePurchaseData['amount'];
 
                 if (!$airtimePurchaseData['status']) {
+
+                    $transactionHistory->update([
+                        'transaction_status' => TransactionStatus::Failed->value,
+                        'comment' => $airtimePurchaseData['message'],
+                    ]);
+
                     throw new \Exception($airtimePurchaseData['message']);
                 }
 
                 $this->updateWalletBalance($airtimePurchaseData['amount']);
-                return $this->makeTransactionHistory($this->transactionData, TransactionStatus::Success);
+                $transactionHistory->update([
+                    'transaction_status' => TransactionStatus::Success->value,
+                ]);
+
+                return $transactionHistory;
             });
 
             return generateApiSuccessResponse('Airtime Purchase Successful', [
@@ -47,14 +60,8 @@ class AirtimePurchaseAction
             ]);
 
         } catch (\Exception $exception) {
-
-            $transactionHistory = $this->makeTransactionHistory($this->transactionData, TransactionStatus::Failed);
-
             return generateApiErrorResponse(
                 'Failed ' . $exception->getMessage(),
-                data: [
-                    "invoice" => $transactionHistory
-                ],
                 statusCode: Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
@@ -75,15 +82,17 @@ class AirtimePurchaseAction
         return $response;
     }
 
-    public function makeTransactionHistory(array $data, TransactionStatus $status): Transaction
+    public function makeTransactionHistory(array $data): Transaction
     {
         $user = auth()->user();
+        $ref = Str::uuid()->toString();
+
         return $user->transactions()->create([
             'amount' => $data['amount'],
             'payment_method' => 'wallet',
-            'payment_reference' => $data['payment_reference'],
+            'transaction_reference' => $ref,
             'transaction_type' => TransactionType::Purchase->value,
-            'transaction_status' => $status->value,
+            'transaction_status' => TransactionStatus::Pending->value,
         ]);
     }
 

@@ -12,6 +12,7 @@ class Transaction extends AbstractModel
         'amount',
         'payment_method',
         'payment_reference',
+        'transaction_reference',
         'transaction_type',
         'transaction_status',
     ];
